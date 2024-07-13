@@ -1,8 +1,10 @@
+
 let now_playing = document.querySelector(".now-playing");
+let wrapper = document.querySelector(".wrapper");
 let track_art = document.querySelector(".track-art");
 let track_name = document.querySelector(".track-name");
 let track_artist = document.querySelector(".track-artist");
-
+let heart = document.querySelector(".heart");
 let playpause_btn = document.querySelector(".playpause-track");
 let next_btn = document.querySelector(".next-track");
 let prev_btn = document.querySelector(".prev-track");
@@ -13,6 +15,9 @@ let curr_time = document.querySelector(".current-time");
 let total_duration = document.querySelector(".total-duration");
 let wave = document.getElementById("wave");
 let randomIcon = document.querySelector(".fa-random");
+let musicList = wrapper.querySelector(".music-list");
+let moreMusicBtn = wrapper.querySelector("#more-music");
+let closemoreMusic = musicList.querySelector("#close");
 let curr_track = document.createElement("audio");
 let track_index = 0;
 let isPlaying = false;
@@ -32,6 +37,7 @@ const music_list = [
     artist: "Nasr Mahrous",
     music: "fen.mp3",
   },
+
   {
     img: "halgtak.jpg",
     name: "Halagatk Bergalatk",
@@ -53,10 +59,13 @@ const music_list = [
   {
     img: "baby.jpg",
     name: "Baby Shark",
-    artist: "Pinkfong Songs",
+    artist: "PinkFong Songs",
     music: "shark.mp3",
   },
 ];
+
+// Ensure that `ulTag` is declared and assigned after `wrapper` is properly assigned
+const ulTag = wrapper.querySelector("ul");
 
 loadTrack(track_index);
 
@@ -77,6 +86,7 @@ function loadTrack(track_index) {
 
   curr_track.addEventListener("ended", nextTrack);
   random_bg_color();
+  playingSong();
 }
 
 function random_bg_color() {
@@ -97,7 +107,6 @@ function random_bg_color() {
     "d",
     "e",
   ];
-  let a;
 
   function populate(a) {
     for (let i = 0; i < 6; i++) {
@@ -109,7 +118,7 @@ function random_bg_color() {
   }
   let Color1 = populate("#");
   let Color2 = populate("#");
-  var angle = "to right";
+  let angle = "to right";
 
   let gradient =
     "linear-gradient(" + angle + "," + Color1 + ", " + Color2 + ")";
@@ -137,8 +146,7 @@ function pauseRandom() {
 }
 
 function repeatTrack() {
-  let current_index = track_index;
-  loadTrack(current_index);
+  loadTrack(track_index);
   playTrack();
 }
 
@@ -163,10 +171,10 @@ function pauseTrack() {
 }
 
 function nextTrack() {
-  if (track_index < music_list.length - 1 && isRandom === false) {
+  if (track_index < music_list.length - 1 && !isRandom) {
     track_index += 1;
-  } else if (track_index < music_list.length - 1 && isRandom === true) {
-    let random_index = Number.parseInt(Math.random() * music_list.length);
+  } else if (track_index < music_list.length - 1 && isRandom) {
+    let random_index = Math.floor(Math.random() * music_list.length);
     track_index = random_index;
   } else {
     track_index = 0;
@@ -183,6 +191,12 @@ function prevTrack() {
   }
   loadTrack(track_index);
   playTrack();
+}
+
+function change() {
+  heart.addEventListener("click", () => {
+    heart.classList.toggle("color"); // Change color on click
+  });
 }
 
 function seekTo() {
@@ -209,20 +223,123 @@ function setUpdate() {
       curr_track.duration - durationMinutes * 60
     );
 
-    if (currentSeconds < 10) {
-      currentSeconds = "0" + currentSeconds;
-    }
-    if (durationSeconds < 10) {
-      durationSeconds = "0" + durationSeconds;
-    }
-    if (currentMinutes < 10) {
-      currentMinutes = "0" + currentMinutes;
-    }
-    if (durationMinutes < 10) {
-      durationMinutes = "0" + durationMinutes;
-    }
+    if (currentSeconds < 10) currentSeconds = "0" + currentSeconds;
+    if (durationSeconds < 10) durationSeconds = "0" + durationSeconds;
+    if (currentMinutes < 10) currentMinutes = "0" + currentMinutes;
+    if (durationMinutes < 10) durationMinutes = "0" + durationMinutes;
 
     curr_time.textContent = currentMinutes + ":" + currentSeconds;
     total_duration.textContent = durationMinutes + ":" + durationSeconds;
   }
+}
+
+// Show music list onclick of music icon
+moreMusicBtn.addEventListener("click", () => {
+  musicList.classList.toggle("show");
+});
+closemoreMusic.addEventListener("click", () => {
+  moreMusicBtn.click();
+});
+
+// Create li tags according to array length for list
+for (let i = 0; i < music_list.length; i++) {
+  let liTag = `<li li-index="0">
+                <div class="row">
+                  <span>Ana Sponge Bob</span>
+                  <p>Hamada Helal</p>
+                </div>
+    
+                <audio class="bob.mp3" src="bob.mp3"></audio>
+                            <span id="bob.mp3" class="audio-duration">04:37</span>
+              </li>
+              <li li-index="1">
+                <div class="row">
+                  <span>Baba Fen</span>
+                  <p>Nasr Mahrous</p>
+                </div>
+    
+                <audio class="fen.mp3" src="fen.mp3"></audio>
+                            <span id="fen.mp3" class="audio-duration">02:54</span>
+              </li>
+              <li li-index="2">
+                <div class="row">
+                  <span>Halagatk Bergalatk</span>
+                  <p>Hamada Helal</p>
+                </div>
+    
+                <audio class="hal.mp3" src="hal.mp3"></audio>
+                            <span id="hal.mp3" class="audio-duration">04:27</span>
+              </li>
+              <li li-index="3">
+                <div class="row">
+                  <span>Ya Lolo Feh Nono</span>
+                  <p>Farfasha</p>
+                </div>
+    
+                <audio class="nono.mp3" src="nono.mp3"></audio>
+                            <span id="nono.mp3" class="audio-duration">02:10</span>
+              </li>
+                </li>
+              <li li-index="4">
+                <div class="row">
+                  <span>Fe Manzel ElSngab</span>
+                  <p>Osratna</p>
+                </div>
+    
+                <audio class="sng.mp3" src="sng.mp3"></audio>
+                            <span id="sng.mp3" class="audio-duration">02:30</span>
+              </li>  </li>
+              <li li-index="5">
+                <div class="row">
+                  <span>Baby Shark</span>
+                  <p>PinkFong Songs</p>
+                </div>
+    
+                <audio class="shark.mp3" src="shark.mp3"></audio>
+                            <span id="shark.mp3" class="audio-duration">02:16</span>
+              </li>`;
+  ulTag.insertAdjacentHTML("beforeend", liTag); // Inserting the li inside ul tag
+  let liAudioDurationTag = ulTag.querySelector(`#${music_list[i].music}`);
+  let liAudioTag = ulTag.querySelector(`.${music_list[i].music}`);
+
+  liAudioTag.addEventListener("loadeddata", () => {
+    let duration = liAudioTag.duration;
+    let totalMin = Math.floor(duration / 60);
+    let totalSec = Math.floor(duration % 60);
+    if (totalSec < 10) {
+      // If sec is less than 10 then add 0 before it
+      totalSec = `0${totalSec}`;
+    }
+    liAudioDurationTag.innerText = `${totalMin}:${totalSec}`; // Passing total duration of song
+    liAudioDurationTag.setAttribute("t-duration", `${totalMin}:${totalSec}`); // Adding t-duration attribute with total duration value
+  });
+}
+
+// Play particular song from the list onclick of li tag
+function playingSong() {
+  const allLiTag = ulTag.querySelectorAll("li");
+  for (let j = 0; j < allLiTag.length; j++) {
+    let audioTag = allLiTag[j].querySelector(".audio-duration");
+
+    if (allLiTag[j].classList.contains("playing")) {
+      allLiTag[j].classList.remove("playing");
+      let adDuration = audioTag.getAttribute("t-duration");
+      audioTag.innerText = adDuration;
+    }
+    // If the li tag index is equal to the musicIndex then add playing class in it
+    if (allLiTag[j].getAttribute("li-index") == track_index) {
+      allLiTag[j].classList.add("playing");
+      audioTag.innerText = "Playing";
+    }
+    allLiTag[j].setAttribute("onclick", "clicked(this)");
+  }
+}
+
+// Particular li clicked function
+function clicked(element) {
+  let getLiIndex = element.getAttribute("li-index");
+  track_index = getLiIndex; // Updating current song index with clicked li index
+  loadTrack(track_index);
+  playTrack();
+  playingSong();
 }
