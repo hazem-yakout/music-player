@@ -1,7 +1,37 @@
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(to right, #9a1d86, #1595be);
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.wrapper i {
+  cursor: pointer;
+}
+
+.top-bar,
+.progress-area .song-timer,
+.controls,
+.music-list .header,
+.music-list ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+i {
+  font-size: 28px;
+  user-select: none;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 .player {
@@ -10,6 +40,7 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 }
 
 .wrapper {
@@ -219,3 +250,103 @@ p {
 .stroke:nth-child(7) {
   animation-delay: 0s;
 }
+
+.music-list {
+  position: absolute;
+  background: #fff;
+  width: 90%;
+  left: 0;
+  bottom: -55%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  padding: 15px 30px;
+  border-radius: 15px;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease-out;
+}
+
+.music-list.show {
+  bottom: 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.header .row {
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  color: rgb(59, 59, 59);
+}
+
+.header .row i {
+  cursor: default;
+}
+
+.header .row span {
+  margin-left: 5px;
+}
+
+.header #close {
+  font-size: 22px;
+  color: rgb(59, 59, 59);
+}
+
+.music-list ul {
+  margin: 10px 0;
+  max-height: 260px;
+  overflow: auto;
+}
+
+.music-list ul::-webkit-scrollbar {
+  width: 0px;
+}
+
+.music-list ul li {
+  list-style: none;
+  display: flex;
+  cursor: pointer;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  color: rgb(59, 59, 59);
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.music-list ul li:last-child {
+  border-bottom: 0px;
+}
+
+.music-list ul li .row span {
+  font-size: 17px;
+}
+
+.music-list ul li .row p {
+  opacity: 0.9;
+}
+
+ul li .audio-duration {
+  font-size: 16px;
+}
+
+ul li.playing {
+  pointer-events: none;
+  color: violet;
+}
+
+#more-music {
+  font-size: 50px;
+}
+
+.heart {
+  font-size: 40px;
+}
+
+.heart:hover {
+  color: rgb(217, 82, 82);
+  font-size: 50px;
+}
+
+.heart.color {
+  color: red;
+}
+
