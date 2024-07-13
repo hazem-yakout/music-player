@@ -14,6 +14,10 @@
     />
     <link
       rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
   </head>
@@ -54,6 +58,9 @@
         </div>
 
         <div class="buttons">
+          <div class="heart" onclick="change()">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+          </div>
           <div class="random-track" onclick="randomTrack()">
             <i class="fas fa-random fa-2x" title="random"></i>
           </div>
@@ -69,6 +76,21 @@
           <div class="repeat-track" onclick="repeatTrack()">
             <i class="fa fa-repeat fa-2x" title="repeat"></i>
           </div>
+          <div class="more">
+            <i id="more-music" class="material-icons">queue_music</i>
+          </div>
+        </div>
+        <div class="music-list">
+          <div class="header">
+            <div class="row">
+              <i class="list material-icons">queue_music</i>
+              <span>Music list</span>
+            </div>
+            <i id="close" class="material-icons">close</i>
+          </div>
+          <ul>
+            <!-- here li list are coming from js -->
+          </ul>
         </div>
 
         <div id="wave">
