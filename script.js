@@ -26,12 +26,14 @@ let updateTimer;
 
 const music_list = [
   {
+    id: 0,
     img: "sponge.jpg",
     name: "Ana Sponge Bob",
     artist: "Hamada Helal",
     music: "bob.mp3",
   },
   {
+    id: 1,
     img: "baba.jpg",
     name: "Baba Fen",
     artist: "Nasr Mahrous",
@@ -39,24 +41,28 @@ const music_list = [
   },
 
   {
+    id: 2,
     img: "halgtak.jpg",
     name: "Halagatk Bergalatk",
     artist: "Hamada Helal",
     music: "hal.mp3",
   },
   {
+    id: 3,
     img: "lolo.jpg",
     name: "Ya Lolo Fe Nono",
     artist: "Farfasha",
     music: "nono.mp3",
   },
   {
+    id: 4,
     img: "sngab.jpg",
     name: "Fe Manzel ElSngab",
     artist: "Osratna",
     music: "sng.mp3",
   },
   {
+    id: 5,
     img: "baby.jpg",
     name: "Baby Shark",
     artist: "PinkFong Songs",
@@ -80,7 +86,7 @@ function loadTrack(track_index) {
   track_name.textContent = music_list[track_index].name;
   track_artist.textContent = music_list[track_index].artist;
   now_playing.textContent =
-    "Playing music " + (track_index + 1) + " of " + music_list.length;
+    "Playing music " + (parseInt(track_index) + 1) + " of " + music_list.length;
 
   updateTimer = setInterval(setUpdate, 1000);
 
@@ -183,6 +189,12 @@ function nextTrack() {
   playTrack();
 }
 
+function change() {
+  heart.addEventListener("click", () => {
+    heart.classList.toggle("color"); // Change color on click
+  });
+}
+
 function prevTrack() {
   if (track_index > 0) {
     track_index -= 1;
@@ -191,12 +203,6 @@ function prevTrack() {
   }
   loadTrack(track_index);
   playTrack();
-}
-
-function change() {
-  heart.addEventListener("click", () => {
-    heart.classList.toggle("color"); // Change color on click
-  });
 }
 
 function seekTo() {
