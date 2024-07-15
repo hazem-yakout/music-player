@@ -353,9 +353,6 @@ ul li.playing {
 @media only screen and (max-width: 600px) {
   .player {
     padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .wrapper {
     padding: 15px;
@@ -404,13 +401,19 @@ ul li.playing {
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media (max-width: 480px) {
+  .buttons i,
+  #more-music {
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+  }
   .player {
     padding: 15px;
   }
   .wrapper {
     padding: 10px;
-    width: 100%;
+    width: auto;
   }
   .track-art {
     height: 120px;
